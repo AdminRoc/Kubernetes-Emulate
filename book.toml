@@ -1,0 +1,17 @@
+[book]
+authors = ["roc"]
+language = "zh_CN"
+multilingual = false
+src = "src"
+title = "KubernetesGuide"
+
+[output.html]
+additional-css = ["style.css"]
+additional-js = ["custom.js", "bigPicture.js"]
+git-repository-url = "https://github.com/imroc/kubernetes-guide"
+edit-url-template = "https://github.com/imroc/kubernetes-guide/edit/master/{path}"
+site-url="/kubernetes/"
+
+[output.html.fold]
+enable = true
+level = 1
