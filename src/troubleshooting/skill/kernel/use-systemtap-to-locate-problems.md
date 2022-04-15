@@ -111,7 +111,8 @@ Pod 莫名其妙被杀死? 可以使用 systemtap 来监视进程的信号发送
 
 拿到容器 id 反查容器的主进程 pid:
 
-```bash
+```
+bash
 $ docker inspect -f "{{.State.Pid}}" 5fb8adf9ee62afc6d3f6f3d9590041818750b392dff015d7091eaaf99cf1c945
 7942
 ```
@@ -139,6 +140,7 @@ probe signal.send{
 stap sg.stp
 ```
 
+
 当容器进程被杀死时，脚本捕捉到事件，执行输出:
 
 ```text
@@ -146,6 +148,8 @@ pkill(23549) send SIGKILL to server(7942)
 parent of sender: bash(23495)
 task_ancestry:swapper/0(0m0.000000000s)=>systemd(0m0.080000000s)=>vGhyM0(19491m2.579563677s)=>sh(33473m38.074571885s)=>bash(33473m38.077072025s)=>bash(33473m38.081028267s)=>bash(33475m4.817798337s)=>pkill(33475m5.202486630s)
 ```
+
+
 
 通过观察 `task_ancestry` 可以看到杀死进程的所有父进程，在这里可以看到有个叫 `vGhyM0` 的奇怪进程名，通常是中了木马，需要安全负责人继续排查。
 
