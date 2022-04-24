@@ -12,9 +12,9 @@ kubelet 有 gc 和驱逐机制，通过 `--image-gc-high-threshold`, `--image-gc
 
 ### 容器运行时使用的目录所在磁盘爆满
 
-如果容器运行时使用的目录所在磁盘空间爆满，可能会造成容器运行时无响应，比如 docker，执行 docker 相关的命令一直 hang 住， kubelet 日志也可以看到 PLEG unhealthy，因为 CRI 调用 timeout，当然也就无法创建或销毁容器，通常表现是 Pod 一直 ContainerCreating 或 一直 Terminating。
+如果容器运行时使用的目录所在磁盘空间爆满，可能会造成容器运行时无响应，比如 docker，执行 docker 相关的命令一直 hang 住， kubelet 日志也可以看到 PLEG unhealthy，因为 CRI 调用 的是timeout，当然也就无法创建或销毁容器，通常表现是 Pod 一直 ContainerCreating 或 一直 Terminating。
 
-docker 默认使用的目录主要有:
+docker 默认使用的目录主要有:  
 
 * `/var/run/docker`: 用于存储容器运行状态，通过 dockerd 的 `--exec-root` 参数指定。
 * `/var/lib/docker`: 用于持久化容器相关的数据，比如容器镜像、容器可写层数据、容器标准日志输出、通过 docker 创建的 volume 等
